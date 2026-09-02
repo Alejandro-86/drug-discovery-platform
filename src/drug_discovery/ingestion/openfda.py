@@ -78,7 +78,8 @@ class OpenFDAIngester:
 
         compound_id = app_numbers[0] if app_numbers else f"fda_{name.replace(' ', '_')}"
 
-        indications_raw: list[str] = list(record.get("indications_and_usage") or [])
+        raw_indications = record.get("indications_and_usage") or []
+        indications_raw: list[str] = [str(i) for i in raw_indications if isinstance(i, str)]
         indications = [i[:200] for i in indications_raw[:3]]  # cap length
 
         return Compound(
