@@ -71,7 +71,8 @@ class OpenFDAIngester:
         brand_names: list[str]   = openfda.get("brand_name", [])    # type: ignore[assignment]
         app_numbers: list[str]   = openfda.get("application_number", [])  # type: ignore[assignment]
 
-        name = (generic_names[0] if generic_names else brand_names[0] if brand_names else "").lower()
+        name = (generic_names[0] if generic_names else brand_names[0] if brand_names else "")
+        name = name.lower()
         if not name:
             return None
 

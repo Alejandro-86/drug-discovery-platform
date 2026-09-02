@@ -7,7 +7,12 @@ Tests use in-memory stubs — no running databases required.
 from abc import ABC, abstractmethod
 
 from drug_discovery.models.compound import Compound
-from drug_discovery.models.entity import Disease, EntityRelationship, Protein, RelationType
+from drug_discovery.models.entity import (
+    Disease,
+    EntityRelationship,
+    Protein,
+    RelationType,
+)
 from drug_discovery.models.paper import Paper
 
 

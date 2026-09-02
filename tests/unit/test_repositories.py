@@ -3,14 +3,18 @@
 Tests use in-memory stubs — no running databases required.
 """
 
-import pytest
-from drug_discovery.models.compound import Compound, ApprovalStatus
+from drug_discovery.models.compound import ApprovalStatus, Compound
+from drug_discovery.models.entity import (
+    Disease,
+    EntityRelationship,
+    Protein,
+    RelationType,
+)
 from drug_discovery.models.paper import Paper
-from drug_discovery.models.entity import Disease, Protein, EntityRelationship, RelationType
 from drug_discovery.storage.base import (
     CompoundRepository,
-    PaperRepository,
     EntityRepository,
+    PaperRepository,
 )
 
 

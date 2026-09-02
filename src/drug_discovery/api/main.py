@@ -7,7 +7,6 @@ from drug_discovery.api.schemas import (
     HealthResponse,
     SemanticSearchRequest,
     SemanticSearchResponse,
-    PaperSummary,
 )
 
 app = FastAPI(

@@ -3,13 +3,10 @@
 All HTTP calls mocked with pytest-httpx.
 """
 
-import pytest
 from pytest_httpx import HTTPXMock
-from drug_discovery.ingestion.pubmed import PubMedIngester
-from drug_discovery.ingestion.openfda import OpenFDAIngester
-from drug_discovery.models.paper import Paper
-from drug_discovery.models.compound import ApprovalStatus
 
+from drug_discovery.ingestion.openfda import OpenFDAIngester
+from drug_discovery.ingestion.pubmed import PubMedIngester
 
 PUBMED_SEARCH = """<?xml version="1.0"?>
 <eSearchResult>
@@ -61,7 +58,11 @@ class TestPubMedIngester:
         assert papers[0].year == 2023
 
     async def test_ingest_empty_query_returns_empty(self, httpx_mock: HTTPXMock) -> None:
-        httpx_mock.add_response(text="<?xml version='1.0'?><eSearchResult><Count>0</Count><IdList></IdList></eSearchResult>")
+        empty_xml = (
+            "<?xml version='1.0'?>"
+            "<eSearchResult><Count>0</Count><IdList></IdList></eSearchResult>"
+        )
+        httpx_mock.add_response(text=empty_xml)
         ingester = PubMedIngester()
         papers = await ingester.ingest(query="zzz_nonexistent_zzz")
         assert papers == []

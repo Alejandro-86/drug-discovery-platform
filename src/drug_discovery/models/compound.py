@@ -1,6 +1,7 @@
 """Domain model for drug compounds."""
 
 from enum import StrEnum
+
 from pydantic import BaseModel, field_validator
 
 

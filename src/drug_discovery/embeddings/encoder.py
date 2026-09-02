@@ -64,7 +64,7 @@ class SentenceTransformerEncoder(AbstractEncoder):
     ) -> None:
         self._model_name = model_name
         self._cache_dir = cache_dir
-        self._model: "SentenceTransformer | None" = None
+        self._model: SentenceTransformer | None = None
 
     def _load(self) -> "SentenceTransformer":
         """Lazy-load the model on first encode call."""

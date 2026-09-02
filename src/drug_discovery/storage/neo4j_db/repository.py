@@ -8,9 +8,8 @@ Models the drug discovery knowledge graph:
 """
 
 import logging
-from typing import Any
 
-from neo4j import AsyncGraphDatabase, AsyncDriver
+from neo4j import AsyncDriver, AsyncGraphDatabase
 
 from drug_discovery.models.entity import (
     Disease,

@@ -1,13 +1,12 @@
 """PostgreSQL compound and paper metadata repository using SQLAlchemy."""
 
 import json
-from typing import Any
 
 from sqlalchemy import Column, Integer, String, Text, select
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import DeclarativeBase, mapped_column
 
-from drug_discovery.models.compound import Compound, ApprovalStatus
+from drug_discovery.models.compound import ApprovalStatus, Compound
 from drug_discovery.models.paper import Paper
 from drug_discovery.storage.base import CompoundRepository, PaperRepository
 

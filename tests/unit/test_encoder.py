@@ -1,7 +1,8 @@
 """Unit tests for the embedding encoder — uses a stub to avoid loading the model."""
 
 import pytest
-from drug_discovery.embeddings.encoder import AbstractEncoder, VECTOR_DIM
+
+from drug_discovery.embeddings.encoder import VECTOR_DIM, AbstractEncoder
 
 
 class StubEncoder(AbstractEncoder):
@@ -41,7 +42,7 @@ class TestAPISchemas:
 
     def test_search_request_requires_query(self) -> None:
         from drug_discovery.api.schemas import SemanticSearchRequest
-        with pytest.raises(Exception):
+        with pytest.raises((TypeError, ValueError)):
             SemanticSearchRequest()  # type: ignore[call-arg]
 
     def test_search_request_valid(self) -> None:

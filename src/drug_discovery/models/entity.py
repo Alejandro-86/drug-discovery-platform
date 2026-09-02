@@ -6,6 +6,7 @@ target identification.
 """
 
 from enum import StrEnum
+
 from pydantic import BaseModel, field_validator
 
 

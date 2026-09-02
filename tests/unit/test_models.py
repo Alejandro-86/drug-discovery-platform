@@ -1,9 +1,15 @@
 """Unit tests for domain models — written before implementation."""
 
 import pytest
-from drug_discovery.models.compound import Compound, ApprovalStatus
+
+from drug_discovery.models.compound import ApprovalStatus, Compound
+from drug_discovery.models.entity import (
+    Disease,
+    EntityRelationship,
+    Protein,
+    RelationType,
+)
 from drug_discovery.models.paper import Paper
-from drug_discovery.models.entity import Disease, Protein, EntityRelationship, RelationType
 
 
 class TestCompound:
