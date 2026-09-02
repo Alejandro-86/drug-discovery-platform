@@ -92,9 +92,9 @@ class QdrantVectorRepository(VectorRepository):
                 f"query vector must have {VECTOR_DIM} dimensions, got {len(query_vector)}"
             )
 
-        hits = self._client.search(
+        hits = self._client.query_points(  # type: ignore[attr-defined]
             collection_name=COLLECTION,
-            query_vector=query_vector,
+            query=query_vector,
             limit=limit,
-        )
+        ).points
         return [{"score": hit.score, **(hit.payload or {})} for hit in hits]

@@ -52,7 +52,7 @@ class OpenFDAIngester:
         results = data.get("results", [])
         compounds = [self._parse_record(r) for r in results]
         logger.info("openfda: ingested %d compounds for query '%s'", len(compounds), query)
-        return [c for c in compounds if c is not None]  # type: ignore[misc]
+        return [c for c in compounds if c is not None]
 
     def _parse_record(self, record: dict[str, object]) -> Compound | None:
         """Parse a single drug label record into a Compound.
@@ -67,9 +67,9 @@ class OpenFDAIngester:
         if not isinstance(openfda, dict):
             return None
 
-        generic_names: list[str] = openfda.get("generic_name", [])  # type: ignore[assignment]
-        brand_names: list[str]   = openfda.get("brand_name", [])    # type: ignore[assignment]
-        app_numbers: list[str]   = openfda.get("application_number", [])  # type: ignore[assignment]
+        generic_names: list[str] = list(openfda.get("generic_name") or [])
+        brand_names: list[str] = list(openfda.get("brand_name") or [])
+        app_numbers: list[str] = list(openfda.get("application_number") or [])
 
         name = (generic_names[0] if generic_names else brand_names[0] if brand_names else "")
         name = name.lower()
@@ -78,7 +78,7 @@ class OpenFDAIngester:
 
         compound_id = app_numbers[0] if app_numbers else f"fda_{name.replace(' ', '_')}"
 
-        indications_raw: list[str] = record.get("indications_and_usage", [])  # type: ignore[assignment]
+        indications_raw: list[str] = list(record.get("indications_and_usage") or [])
         indications = [i[:200] for i in indications_raw[:3]]  # cap length
 
         return Compound(

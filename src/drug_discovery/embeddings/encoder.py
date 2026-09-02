@@ -89,7 +89,7 @@ class SentenceTransformerEncoder(AbstractEncoder):
         """
         model = self._load()
         vector = model.encode(text, convert_to_numpy=True)
-        return vector.tolist()
+        return vector.tolist()  # type: ignore[no-any-return]
 
     def encode_batch(self, texts: list[str]) -> list[list[float]]:
         """Encode a batch of texts.
